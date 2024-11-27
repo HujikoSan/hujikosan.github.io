@@ -8,6 +8,7 @@ defineProps({
 </script>
 
 <template>
+  <!--
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
     <h3>
@@ -15,6 +16,14 @@ defineProps({
       <a href="https://vite.dev/" target="_blank" rel="noopener">Vite</a> +
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
     </h3>
+  </div>
+  -->
+  <div>
+    <h1>くぁwせdrftgy</h1>
+    <h2>作ったもの</h2>
+    <ui>
+      <li><router-link to="/todo">Todo</router-link></li>
+    </ui>
   </div>
 </template>
 

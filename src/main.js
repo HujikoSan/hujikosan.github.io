@@ -1,8 +1,6 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
 import App from './App.vue'
-import Todo from './Todo.vue'
+import './assets/main.css'
+import router from './router'
 
-createApp(App).mount('#app')
-createApp(Todo).mount('#todo')
+createApp(App).use(router).mount('#app')
