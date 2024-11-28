@@ -23,6 +23,48 @@ const passed_days = computed(() => {
   return target_date_in_days.value - base_date_in_days.value + (include_base_date.value ? 1 : 0)
 })
 
+const anniversary_description = computed(() => {
+  return search_anniversary_description(target_year.value, target_month.value, target_date.value,
+                                          base_year.value, base_month.value, base_date.value, include_base_date.value)
+})
+
+function search_anniversary_description(target_year, target_month, target_date,
+                                        base_year, base_month, base_date, include_base_date) {
+  var addidion = (include_base_date ? 1 : 0)
+  var result = "記念日！"
+  console.log(addidion)
+  console.log(get_passed_days(target_year, target_month + 1, target_date) - get_passed_days(base_year, base_month + 1, base_date)
+              + addidion)
+
+  if (target_year == base_year && target_month == base_month && target_date == base_date) {
+    result = "当日！"
+    return result
+  }else if (target_date == base_date) {
+    var passed_years = target_year - base_year
+    var passed_months = target_month - base_month + passed_years * 12
+    result = passed_months + "ヶ月記念日！"
+  }else if ((get_passed_days(target_year, target_month + 1, target_date) - get_passed_days(base_year, base_month + 1, base_date)
+                  + addidion) % 100 == 0) {
+    result = get_passed_days(target_year, target_month + 1, target_date) - get_passed_days(base_year, base_month + 1, base_date)
+                  + addidion + "日記念日！"
+  }else {
+    var [ty, tm, td] = [target_year, target_month, target_date]
+
+    var count_of_increment = 0
+    while ((get_passed_days(ty, tm + 1, td) - get_passed_days(base_year, base_month + 1, base_date)
+                  + addidion) % 100 != 0 && count_of_increment < 5000) {
+      tm++
+      count_of_increment++
+      if (tm == 12) {
+        ty++
+        tm = 0
+      }
+    }
+      result = get_passed_days(ty, tm + 1, td) - get_passed_days(base_year, base_month + 1, base_date)
+      + addidion + "日記念日の" + count_of_increment + "ヶ月前！"
+  }
+  return result
+}
 
 function get_passed_days(year, month, date) {
   var d = new Date(year, month, date)
@@ -52,7 +94,7 @@ function get_passed_days(year, month, date) {
   </div>
   <div>
     <h2>{{ target_year }}年{{ target_month }}月{{ target_date }}日は、</h2>
-    <h2>{{ base_year }}年{{ base_month }}月{{ base_date }}日の</h2>
-    <h2>{{ passed_days }}日目！</h2>
+    <h2>{{ base_year }}年{{ base_month }}月{{ base_date }}日から見て、</h2>
+    <h2>{{ anniversary_description }}</h2>
   </div>
 </template>
