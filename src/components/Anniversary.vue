@@ -92,7 +92,6 @@ function get_passed_days(year, month, date) {
     <h1>毎日が記念日！</h1>
     <p>基準日: </p>
     <SelectDate @date="(date) => { reflection_base(date) }" />
-    <p>{{ base_year }}年{{ base_month }}月{{ base_date }}日</p>
     <p>目標日: </p>
     <SelectDate @date="(date) => { reflection_target(date) }" />
     <p>
