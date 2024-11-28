@@ -23,6 +23,7 @@ defineProps({
     <h2>作ったもの</h2>
     <ui>
       <li><router-link to="/todo">Todo</router-link></li>
+      <li><router-link to="/anniversary">Anniversary</router-link></li>
     </ui>
   </div>
 </template>

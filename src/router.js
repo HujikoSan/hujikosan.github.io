@@ -12,5 +12,13 @@ export default createRouter({
       path: '/todo',
       component: () => import('./components/Todo.vue'),
     },
+    {
+      path: '/anniversary',
+      component: () => import('./components/Anniversary.vue'),
+    },
+    {
+      path: '/:catchAll(.*)',
+      component: () => import('./components/NotFound.vue'),
+    },
   ]
 })
