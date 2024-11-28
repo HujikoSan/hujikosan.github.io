@@ -77,13 +77,13 @@ function get_passed_days(year, month, date) {
   <div>
     <h1>毎日が記念日！</h1>
     <p>基準日: </p>
-    <input type="number" v-model="base_year" />
-    <input type="number" v-model="base_month" />
-    <input type="number" v-model="base_date" />
+    <input type="number" v-model="base_year" />年
+    <input type="number" v-model="base_month" />月
+    <input type="number" v-model="base_date" />日
     <p>目標日: </p>
-    <input type="number" v-model="target_year" />
-    <input type="number" v-model="target_month" />
-    <input type="number" v-model="target_date" />
+    <input type="number" v-model="target_year" />年
+    <input type="number" v-model="target_month" />月
+    <input type="number" v-model="target_date" />日
     <p>
       <label><input type="checkbox" v-model="include_base_date" />
       基準日を含める
