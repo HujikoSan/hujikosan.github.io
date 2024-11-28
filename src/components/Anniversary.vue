@@ -1,19 +1,20 @@
 <script setup>
 import { ref, computed } from 'vue'
+import SelectDate from './SelectDate.vue';
 
 const include_base_date = ref(true)
 
-const base_year = ref(2024)
-const base_month = ref(11)
-const base_date = ref(28)
+const base_year = ref(new Date().getFullYear())
+const base_month = ref(new Date().getMonth() + 1)
+const base_date = ref(new Date().getDate())
 
 const base_date_in_days = computed(() => {
   return get_passed_days(base_year.value, base_month.value + 1, base_date.value)
 })
 
-const target_year = ref(2024)
-const target_month = ref(11)
-const target_date = ref(28)
+const target_year = ref(new Date().getFullYear())
+const target_month = ref(new Date().getMonth() + 1)
+const target_date = ref(new Date().getDate())
 
 const target_date_in_days = computed(() => {
   return get_passed_days(target_year.value, target_month.value + 1, target_date.value)
@@ -24,21 +25,19 @@ const passed_days = computed(() => {
 })
 
 const anniversary_description = computed(() => {
-  return search_anniversary_description(target_year.value, target_month.value, target_date.value,
+  return make_anniversary_description(target_year.value, target_month.value, target_date.value,
                                           base_year.value, base_month.value, base_date.value, include_base_date.value)
 })
 
-function search_anniversary_description(target_year, target_month, target_date,
+function make_anniversary_description(target_year, target_month, target_date,
                                         base_year, base_month, base_date, include_base_date) {
   var addidion = (include_base_date ? 1 : 0)
   var result = "記念日！"
-  console.log(addidion)
-  console.log(get_passed_days(target_year, target_month + 1, target_date) - get_passed_days(base_year, base_month + 1, base_date)
-              + addidion)
-
-  if (target_year == base_year && target_month == base_month && target_date == base_date) {
+  if (target_year < base_year || (target_year == base_year && target_month < base_month) ||
+    (target_year == base_year && target_month == base_month && target_date < base_date)) {
+    result = "過去！"
+  }else if (target_year == base_year && target_month == base_month && target_date == base_date) {
     result = "当日！"
-    return result
   }else if (target_date == base_date) {
     var passed_years = target_year - base_year
     var passed_months = target_month - base_month + passed_years * 12
@@ -52,7 +51,7 @@ function search_anniversary_description(target_year, target_month, target_date,
 
     var count_of_increment = 0
     while ((get_passed_days(ty, tm + 1, td) - get_passed_days(base_year, base_month + 1, base_date)
-                  + addidion) % 100 != 0 && count_of_increment < 5000) {
+                  + addidion) % 100 != 0 && count_of_increment < 50000) {
       tm++
       count_of_increment++
       if (tm == 12) {
@@ -66,6 +65,21 @@ function search_anniversary_description(target_year, target_month, target_date,
   return result
 }
 
+// 以下異常に汚い！なんとかしたい
+
+function reflection_base(Date) {
+  base_year.value = Date[0]
+  base_month.value = Date[1]
+  base_date.value = Date[2]
+}
+
+function reflection_target(Date) {
+  target_year.value = Date[0]
+  target_month.value = Date[1]
+  target_date.value = Date[2]
+}
+
+
 function get_passed_days(year, month, date) {
   var d = new Date(year, month, date)
   return Math.floor(d / (1000 * 60 * 60 * 24))
@@ -77,13 +91,10 @@ function get_passed_days(year, month, date) {
   <div>
     <h1>毎日が記念日！</h1>
     <p>基準日: </p>
-    <input type="number" v-model="base_year" />年
-    <input type="number" v-model="base_month" />月
-    <input type="number" v-model="base_date" />日
+    <SelectDate @date="(date) => { reflection_base(date) }" />
+    <p>{{ base_year }}年{{ base_month }}月{{ base_date }}日</p>
     <p>目標日: </p>
-    <input type="number" v-model="target_year" />年
-    <input type="number" v-model="target_month" />月
-    <input type="number" v-model="target_date" />日
+    <SelectDate @date="(date) => { reflection_target(date) }" />
     <p>
       <label><input type="checkbox" v-model="include_base_date" />
       基準日を含める
