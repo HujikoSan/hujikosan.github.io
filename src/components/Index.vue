@@ -20,9 +20,10 @@ defineProps({
   -->
   <div>
     <h1>くぁwせdrftgy</h1>
+    <h2>自己紹介</h2>
+      <li><router-link to="/about">About</router-link></li>
     <h2>作ったもの</h2>
     <ui>
-      <li><router-link to="/todo">Todo</router-link></li>
       <li><router-link to="/anniversary">Anniversary</router-link></li>
     </ui>
   </div>

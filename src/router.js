@@ -9,8 +9,8 @@ export default createRouter({
       component: Index,
     },
     {
-      path: '/todo',
-      component: () => import('./components/Todo.vue'),
+      path: '/about',
+      component: () => import('./components/About.vue'),
     },
     {
       path: '/anniversary',

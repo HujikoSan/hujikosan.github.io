@@ -107,4 +107,5 @@ function get_passed_days(year, month, date) {
     <h2>{{ base_year }}年{{ base_month }}月{{ base_date }}日から見て、</h2>
     <h2>{{ anniversary_description }}</h2>
   </div>
+  <p><router-link to="/">back</router-link></p>
 </template>
