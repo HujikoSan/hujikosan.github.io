@@ -1,1 +1,0 @@
-import{_ as n,c as r,a as o,F as t,o as s}from"./index-CUSaqTBP.js";const l={};function a(u,e){return s(),r(t,null,[e[0]||(e[0]=o("h1",null,"404 Not Found",-1)),e[1]||(e[1]=o("p",null,"please check your url!",-1))],64)}const d=n(l,[["render",a]]);export{d as default};
