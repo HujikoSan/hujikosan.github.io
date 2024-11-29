@@ -60,7 +60,7 @@ function make_anniversary_description(target_year, target_month, target_date,
       }
     }
       result = get_passed_days(ty, tm + 1, td) - get_passed_days(base_year, base_month + 1, base_date)
-      + addidion + "日記念日の" + count_of_increment + "ヶ月前！"
+      + addidion + "日の" + count_of_increment + "ヶ月前記念日！"
   }
   return result
 }
