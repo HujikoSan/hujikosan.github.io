@@ -25,6 +25,7 @@ defineProps({
     <h2>作ったもの</h2>
     <ui>
       <li><router-link to="/anniversary">Anniversary</router-link></li>
+      <li><router-link to="/hanoi">ハノイの塔</router-link></li>
     </ui>
   </div>
 </template>

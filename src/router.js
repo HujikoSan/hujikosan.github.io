@@ -21,6 +21,11 @@ const router = createRouter({
       component: () => import('./components/Anniversary.vue'),
     },
     {
+      path: '/hanoi',
+      meta: { title: 'ハノイの塔' },
+      component: () => import('./components/Hanoi.vue'),
+    },
+    {
       path: '/:catchAll(.*)',
       meta: { title: '404' },
       component: () => import('./components/NotFound.vue'),
